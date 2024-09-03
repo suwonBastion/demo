@@ -1,0 +1,15 @@
+jonsoft:
+ naver:
+  clientid: 5nzPVTXlooZ5qhwJG2qDHJ
+  secret: $2a$04$vc7XuSWuKXiS/QJ.Ca7EsO
+ godomall:
+  partner: JURCZCUwRCVFRSVFOSVDNCVDMiVDRg==
+  user: JTA5JUFDJUNDJTNEJTNFakQlODklQjdDJUY5JTAzJUEyWSVGQSVGMSUyQSVBRiUxRiVCQSU5QiVDRSU4QiVGOSUxRGclQzglRDkxJUVEJTlEJTEzJUZEJTk0JTdFJUJDJTk1JUM4JUMyJUFGJUFEJUU5QUclOEVOJUE5JUMz
+ esm:
+  masterid: AAAAAAAAAAAAA
+  gmarketid: asdasdasdda
+  auctionid: asdasdasdda
+  secret: asdasdasdasdsdfsdfdssdfsdfsdfsdfdfsdfsdfsdfsdfsdffff
+ coupang:
+  access: 29326dfc-ad7d-4469-b303-829376d217df
+  secret: 6d61f278f2d9713f5c801694aa78d1e4e3ea9f90

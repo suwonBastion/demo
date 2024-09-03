@@ -1,0 +1,14 @@
+spring:
+ profiles:
+  include: key
+ application:
+  name: demo
+ data:
+  redis:
+   host: localhost
+   port: 6379
+
+server:
+  port: 8080
+
+
