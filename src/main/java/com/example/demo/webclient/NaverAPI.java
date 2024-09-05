@@ -74,11 +74,8 @@ public class NaverAPI {
         return dto;
     }
 
-    public <T> T get(String uri, MultiValueMap map, ParameterizedTypeReference<T> t) {
+    public <T> T getList(String uri, MultiValueMap map, ParameterizedTypeReference<T> t) {
         String token = "Bearer " + accessToken;
-
-
-
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(uri)

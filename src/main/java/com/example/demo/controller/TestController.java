@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.TestService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +13,11 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Test환경 API", description = "Test환경 API 입니다.")
 public class TestController {
     private final TestService testService;
 
-    @GetMapping()
+    @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> test2() {
         return testService.test2();
     }

@@ -45,7 +45,7 @@ public class TestService {
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
             map.add("name", name);
 
-            return ResponseEntity.ok(naverAPI.get(PRODUCT, map, bodyListClass(ProductBrandDto.class)));
+            return ResponseEntity.ok(naverAPI.getList(PRODUCT, map, bodyClass(ProductBrandDto.class)));
 
         } catch (WebClientResponseException e) {
 
@@ -84,7 +84,7 @@ public class TestService {
         naverAPI.getAccessToken();
         switch (func) {
             case "getProductBrands" -> {
-                return ResponseEntity.ok(naverAPI.get(PRODUCT, (MultiValueMap) t, bodyListClass(ProductBrandDto.class)));
+                return ResponseEntity.ok(naverAPI.getList(PRODUCT, (MultiValueMap) t, bodyClass(ProductBrandDto.class)));
             }
             case "getConditionProductOrders" -> {
                 return ResponseEntity.ok(naverAPI.getT(PRODUCT_ORDERS, (MultiValueMap) t, ProductOrdersDto.class));
@@ -94,12 +94,7 @@ public class TestService {
         return null;
     }
 
-    private <T> ParameterizedTypeReference<T> bodyClass(Class<T> clazz) {
-        return new ParameterizedTypeReference<T>() {
-        };
-    }
-
-    private <T> ParameterizedTypeReference<List<T>> bodyListClass(Class<T> clazz) {
+    private <T> ParameterizedTypeReference<List<T>> bodyClass(Class<T> clazz) {
         return new ParameterizedTypeReference<List<T>>() {
         };
     }
