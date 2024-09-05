@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -13,7 +14,7 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-
+@RestControllerAdvice
 @RequiredArgsConstructor
 @Slf4j
 public class ExceptionController {
@@ -46,6 +47,15 @@ public class ExceptionController {
         return ResponseEntity
                 .status(e.getStatusCode())
                 .body(new ErrorResponse(HttpStatus.BAD_REQUEST,e.getResponseBodyAsString()));
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<?> exceptionHandler(MethodArgumentNotValidException e) {
+        log.error(e.getBindingResult().getFieldError().getDefaultMessage());
+
+        return ResponseEntity
+                .status(400)
+                .body(new ErrorResponse(HttpStatus.BAD_REQUEST,e.getBindingResult().getFieldError().getDefaultMessage()));
     }
 
     private static String convertExceptionStackTraceToString(Exception ex) {
