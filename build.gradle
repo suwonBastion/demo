@@ -45,7 +45,7 @@ dependencies {
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.4.0'
 	//24.09.05 swj
 	//Coupang HMAC jar 파일 없음 이슈 해결용
-	implementation fileTree(dir: '/src/main/resources/static', include: ['*.jar'])
+	implementation fileTree(dir: 'src/main/resources/static', include: ['*.jar'])
 }
 
 tasks.named('test') {
