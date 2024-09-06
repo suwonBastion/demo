@@ -29,8 +29,8 @@ public class SwaggerConfig {
     //  http://localhost:8080/swagger-ui/index.html
     private Info apiInfo() {
         return new Info()
-                .title("BUCL API")
-                .description("BUCL 관련 API")
+                .title("셀메이트 클론 프로젝트")
+                .description("오픈마켓 API 연동 중계서버")
                 .version("0.0.1");
     }
 }

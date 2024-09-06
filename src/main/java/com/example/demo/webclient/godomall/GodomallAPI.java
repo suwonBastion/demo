@@ -5,11 +5,12 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.codec.xml.Jaxb2XmlDecoder;
-import org.springframework.http.codec.xml.Jaxb2XmlEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import static com.example.demo.path.ApiPaths.*;
 
 @Component
 @RequiredArgsConstructor
@@ -32,12 +33,12 @@ public class GodomallAPI {
                                         )
                                         .build()
                         )
-                        .baseUrl("https://openhub.godo.co.kr/")
+                        .baseUrl(GODOMALL)
                         .build();
     }
 
-    public <T> T get(String uri, MultiValueMap map, Class<T> t) {
-        return webClient.get()
+    public <T> T post(String uri, MultiValueMap map, Class<T> t) {
+        return webClient.post()
                 .uri(uriBuilder -> uriBuilder
                         .path(uri)
                         .queryParams(map)

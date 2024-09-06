@@ -34,17 +34,6 @@ public class OrderSearchDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @XmlAccessorType(XmlAccessType.FIELD)
-    public static class Header {
-        @XmlElement(name = "code")
-        private String code;
-        @XmlElement(name = "msg")
-        private String msg;
-    }
-
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @XmlAccessorType(XmlAccessType.FIELD)
     public static class OrderData {
         @XmlElement(name = "orderNo")
         private String orderNo;
@@ -175,11 +164,11 @@ public class OrderSearchDto {
         @XmlElement(name = "pgChargeBack")
         private String pgChargeBack;
         @XmlElement(name = "boxGoodsPolicy")
-        private BoxGoodsPolicy boxGoodsPolicy;
+        private String boxGoodsPolicy;
         @XmlElement(name = "fbPixelKey")
         private String fbPixelKey;
         @XmlElement(name = "catePriceVariantPolicy")
-        private CatePriceVariantPolicy catePriceVariantPolicy;
+        private String catePriceVariantPolicy;
         @XmlElement(name = "orderDate")
         private String orderDate;
         @XmlElement(name = "memGroupNm")
@@ -195,49 +184,6 @@ public class OrderSearchDto {
         @XmlElement(name = "orderGoodsData")
         private List<OrderGoodsData> orderGoodsData;
 
-
-        @Data
-        @AllArgsConstructor
-        @NoArgsConstructor
-        @XmlAccessorType(XmlAccessType.FIELD)
-        public static class BoxGoodsPolicy {
-            @XmlElement(name = "price20")
-            private String price20;
-            @XmlElement(name = "price10_19")
-            private String price10_19;
-
-
-        }
-
-        @Data
-        @AllArgsConstructor
-        @NoArgsConstructor
-        @XmlAccessorType(XmlAccessType.FIELD)
-        public static class CatePriceVariantPolicy {
-            @XmlElement(name = "applyCd")
-            private ApplyCd applyCd;
-            @XmlElement(name = "policy")
-            private Policy policy;
-            @XmlElement(name = "applySum")
-            private ApplySum applySum;
-            @XmlElement(name = "applyGoodsNo")
-            private ApplyGoodsNo applyGoodsNo;
-            @XmlElement(name = "applyGoodsNoCnt")
-            private ApplyGoodsNoCnt applyGoodsNoCnt;
-            @XmlElement(name = "applyDiscount")
-            private ApplyDiscount applyDiscount;
-            @XmlElement(name = "applyDiscountUnit")
-            private ApplyDiscountUnit applyDiscountUnit;
-        }
-
-        @Data
-        @AllArgsConstructor
-        @NoArgsConstructor
-        @XmlAccessorType(XmlAccessType.FIELD)
-        public static class ApplyCd {
-            @XmlElement(name = "code")
-            private String code;
-        }
 
         @Data
         @AllArgsConstructor
@@ -355,7 +301,7 @@ public class OrderSearchDto {
             @XmlElement(name = "deliveryFixFl")
             private String deliveryFixFl;
             @XmlElement(name = "deliveryWeightInfo")
-            private DeliveryWeightInfo deliveryWeightInfo;
+            private String deliveryWeightInfo;
             @XmlElement(name = "overseasDeliveryPolicy")
             private String overseasDeliveryPolicy;
             @XmlElement(name = "deliveryCollectFl")
@@ -372,13 +318,9 @@ public class OrderSearchDto {
         @Data
         @AllArgsConstructor
         @NoArgsConstructor
-        @XmlAccessorType(XmlAccessType.FIELD)
         public static class DeliveryWeightInfo {
-            @XmlElement(name = "box")
             private String box;
-            @XmlElement(name = "goods")
             private String goods;
-            @XmlElement(name = "total")
             private String total;
         }
 
@@ -553,7 +495,7 @@ public class OrderSearchDto {
             private String optionPrice;
             @XmlElement(name = "optionCostPrice")
             private String optionCostPrice;
-            @XmlElement(name = "smsFoptionTextPricel")
+            @XmlElement(name = "optionTextPrice")
             private String optionTextPrice;
             @XmlElement(name = "fixedPrice")
             private String fixedPrice;
@@ -643,22 +585,6 @@ public class OrderSearchDto {
             private String statusMode;
             @XmlElement(name = "orderWriteCouponInfo")
             private String orderWriteCouponInfo;
-            @XmlElement(name = "optionText")
-            private List<OptionText> optionText;
         }
-
-        @Data
-        @AllArgsConstructor
-        @NoArgsConstructor
-        @XmlAccessorType(XmlAccessType.FIELD)
-        public static class OptionText {
-            @XmlElement(name = "optionSno")
-            private String optionSno;
-            @XmlElement(name = "optionText")
-            private String optionText;
-            @XmlElement(name = "optionTextData")
-            private String optionTextData;
-        }
-
     }
 }

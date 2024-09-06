@@ -22,31 +22,31 @@ public class ExceptionController {
 
     @ExceptionHandler
     public ResponseEntity<?> exceptionHandler(Exception e) {
-      log.error("익셉션에러 : ",convertExceptionStackTraceToString(e));
-      return ResponseEntity.internalServerError().body(e.getMessage());
+        log.error("익셉션에러 : {}", convertExceptionStackTraceToString(e));
+        return ResponseEntity.internalServerError().body(e.getMessage());
     }
 
     @ExceptionHandler
     public ResponseEntity<?> exceptionHandler(RuntimeException e) {
-        log.error("런타임에러 : ",convertExceptionStackTraceToString(e));
+        log.error("런타임에러 : {}", convertExceptionStackTraceToString(e));
         return ResponseEntity.internalServerError().body(e.getMessage());
     }
 
     @ExceptionHandler
     public ResponseEntity<?> exceptionHandler(BaseException e) {
-        log.error("ERROR : ",e.getErrorMessage());
+        log.error("에러 : {}", e.getErrorMessage());
         return ResponseEntity
                 .status(e.getHttpStatus())
-                .body(new ErrorResponse(e.getHttpStatus(),e.getErrorMessage()));
+                .body(new ErrorResponse(e.getHttpStatus(), e.getErrorMessage()));
     }
 
     @ExceptionHandler
     public ResponseEntity<?> exceptionHandler(WebClientResponseException e) {
-        log.error(e.getMessage());
+        log.error("API 통신 에러 : {}", e.getMessage());
         log.error(e.getResponseBodyAsString());
         return ResponseEntity
                 .status(e.getStatusCode())
-                .body(new ErrorResponse(HttpStatus.BAD_REQUEST,e.getResponseBodyAsString()));
+                .body(new ErrorResponse(HttpStatus.BAD_REQUEST, e.getResponseBodyAsString()));
     }
 
     @ExceptionHandler
@@ -55,7 +55,7 @@ public class ExceptionController {
 
         return ResponseEntity
                 .status(400)
-                .body(new ErrorResponse(HttpStatus.BAD_REQUEST,e.getBindingResult().getFieldError().getDefaultMessage()));
+                .body(new ErrorResponse(HttpStatus.BAD_REQUEST, e.getBindingResult().getFieldError().getDefaultMessage()));
     }
 
     private static String convertExceptionStackTraceToString(Exception ex) {
