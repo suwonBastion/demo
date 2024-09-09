@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "data")
 @Data
@@ -31,7 +33,7 @@ public class OrderStatusDto {
         @XmlElement(name = "statusData")
         private String statusData;
         @XmlElement(name = "orderGoodsData")
-        private OrderGoodsData orderGoodsData;
+        private List<OrderGoodsData> orderGoodsData;
     }
 
     @Data

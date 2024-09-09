@@ -1,6 +1,5 @@
 package com.example.demo.exception;
 
-import com.example.demo.service.TestService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,18 +17,21 @@ import java.io.StringWriter;
 @RequiredArgsConstructor
 @Slf4j
 public class ExceptionController {
-    private final TestService testService;
 
     @ExceptionHandler
     public ResponseEntity<?> exceptionHandler(Exception e) {
         log.error("익셉션에러 : {}", convertExceptionStackTraceToString(e));
-        return ResponseEntity.internalServerError().body(e.getMessage());
+        return ResponseEntity
+                .status(500)
+                .body(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
     }
 
     @ExceptionHandler
     public ResponseEntity<?> exceptionHandler(RuntimeException e) {
         log.error("런타임에러 : {}", convertExceptionStackTraceToString(e));
-        return ResponseEntity.internalServerError().body(e.getMessage());
+        return ResponseEntity
+                .status(500)
+                .body(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
     }
 
     @ExceptionHandler

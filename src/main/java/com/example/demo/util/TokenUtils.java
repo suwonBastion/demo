@@ -25,9 +25,9 @@ public class TokenUtils {
     private String NAVER_CLIENTID;
     @Value("${jonsoft.naver.secret}")
     private String NAVER_CLIENT_SECRET;
-    @Value("${jonsoft.godomall.partner}")
+    @Value("${jonsoft.godomall.simpson.partner}")
     private String GODOMALL_PARTNER;
-    @Value("${jonsoft.godomall.user}")
+    @Value("${jonsoft.godomall.simpson.user}")
     private String GODOMALL_USER;
     @Value("${jonsoft.esm.masterid}")
     private String ESM_MASTERID;

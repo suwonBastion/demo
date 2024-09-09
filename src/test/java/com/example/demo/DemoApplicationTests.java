@@ -1,20 +1,20 @@
 package com.example.demo;
 
-import com.coupang.openapi.sdk.Hmac;
 import com.example.demo.entity.Token;
 import com.example.demo.repository.TokenRepo;
 import com.example.demo.util.JwtTokenProvider;
 import com.example.demo.util.TokenUtils;
-import com.example.demo.webclient.dto.NaverAPIDto;
+import com.example.demo.webclient.godomall.dto.DeliveryStatusDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
-import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 class DemoApplicationTests {
@@ -59,7 +59,27 @@ class DemoApplicationTests {
 		String replace = date.replace(":", "%3A");
 		replace = replace.replace("+","%2B");
 		System.out.println(replace);
+	}
 
+	@Test
+	void test5(){
+		ObjectMapper mapper = new ObjectMapper();
+		DeliveryStatusDto dto = new DeliveryStatusDto(
+		123,"123123","p1", "","","",""
+				,"","","","",""
+		);
+		Map<String,Object> map = mapper.convertValue(dto, Map.class);
+
+		MultiValueMap<String, Object> multiValueMap = new LinkedMultiValueMap<>();
+
+		map.entrySet().forEach(entry -> {
+			multiValueMap.add(entry.getKey(), entry.getValue());
+		});
+
+		multiValueMap.add("partner_key", tokenUtils.getGODOMALL_PARTNER());
+		multiValueMap.add("key", tokenUtils.getGODOMALL_USER());
+
+		System.out.println(multiValueMap);
 	}
 
 }
