@@ -1,26 +1,23 @@
 package com.example.demo.service.godomall;
 
+import com.example.demo.dto.OrderSearchRes;
 import com.example.demo.util.GodomallUtils;
-import com.example.demo.util.TokenUtils;
 import com.example.demo.webclient.godomall.GodomallAPI;
 import com.example.demo.webclient.godomall.dto.DeliveryStatusDto;
 import com.example.demo.webclient.godomall.dto.OrderSearchDto;
-import com.example.demo.webclient.godomall.dto.OrderSearchParam;
+import com.example.demo.dto.godomall.OrderSearchParam;
 import com.example.demo.webclient.godomall.dto.OrderStatusDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static com.example.demo.path.ApiPaths.*;
-import static com.example.demo.webclient.godomall.dto.OrderSearchDto.*;
-import static com.example.demo.webclient.godomall.dto.OrderSearchDto.OrderData.*;
 
 @Service
 @RequiredArgsConstructor
@@ -31,17 +28,28 @@ public class GodomallService {
 
     public ResponseEntity<?> orderSearch(OrderSearchParam param) {
         OrderSearchDto orderSearchDto =
-                godomallAPI.post(GODOMALL_ORDER_SEARCH, godomallUtils.createGodomallMap(param), OrderSearchDto.class);
+                godomallAPI.post(
+                        GODOMALL_ORDER_SEARCH,
+                        godomallUtils.createGodomallMap(param),
+                        OrderSearchDto.class
+                );
+
+        //필요한 필드만 response. Dto로 Convert.
+        List<OrderSearchRes> orderSearchRes = convertToOrderSearchRes(orderSearchDto);
 
         //주문상태변경(결재완료->상품준비중) API Request 요청 (테스트필요. 테스트환경 없음)
-//        OrderStatusDto orderSearchDtos = orderStatusUpdate(orderSearchDto);
+//        List<OrderStatusDto> orderSearchDtos = orderStatusUpdate(orderSearchDto);
 
-        return ResponseEntity.ok(orderSearchDto);
+        return ResponseEntity.ok(orderSearchRes);
     }
 
     public ResponseEntity<?> deliveryStatus(@Valid DeliveryStatusDto param) {
         OrderStatusDto res =
-                godomallAPI.post(GODOMALL_ORDER_STATUS, godomallUtils.createGodomallMap(param), OrderStatusDto.class);
+                godomallAPI.post(
+                        GODOMALL_ORDER_STATUS,
+                        godomallUtils.createGodomallMap(param),
+                        OrderStatusDto.class
+                );
 
         return ResponseEntity.ok(res);
     }
@@ -65,6 +73,18 @@ public class GodomallService {
         });
 
         return dtoList;
+    }
+
+    private List<OrderSearchRes> convertToOrderSearchRes(OrderSearchDto orderSearchDto){
+        List<OrderSearchRes> results = new ArrayList<>();
+
+        orderSearchDto.getOrderSearchReturn().getOrderData().forEach(orderData -> {
+            orderData.getOrderGoodsData().forEach(orderGoodsData -> {
+                results.add(OrderSearchRes.createOrderSearchRes(orderSearchDto, orderData, orderGoodsData));
+            });
+        });
+
+        return results;
     }
 
 }

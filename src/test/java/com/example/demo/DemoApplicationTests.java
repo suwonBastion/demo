@@ -72,9 +72,7 @@ class DemoApplicationTests {
 
 		MultiValueMap<String, Object> multiValueMap = new LinkedMultiValueMap<>();
 
-		map.entrySet().forEach(entry -> {
-			multiValueMap.add(entry.getKey(), entry.getValue());
-		});
+		map.forEach(multiValueMap::add);
 
 		multiValueMap.add("partner_key", tokenUtils.getGODOMALL_PARTNER());
 		multiValueMap.add("key", tokenUtils.getGODOMALL_USER());

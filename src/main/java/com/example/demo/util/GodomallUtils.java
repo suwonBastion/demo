@@ -1,9 +1,7 @@
 package com.example.demo.util;
 
-import com.example.demo.webclient.godomall.dto.DeliveryStatusDto;
 import com.example.demo.webclient.godomall.dto.OrderSearchDto;
-import com.example.demo.webclient.godomall.dto.OrderSearchParam;
-import com.example.demo.webclient.godomall.dto.OrderStatusDto;
+import com.example.demo.dto.godomall.OrderSearchParam;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,11 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static com.example.demo.path.ApiPaths.GODOMALL_ORDER_STATUS;
 
 @Component
 @RequiredArgsConstructor

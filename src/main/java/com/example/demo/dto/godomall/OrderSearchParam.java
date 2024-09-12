@@ -1,4 +1,4 @@
-package com.example.demo.webclient.godomall.dto;
+package com.example.demo.dto.godomall;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
