@@ -1,6 +1,7 @@
 package com.example.demo.service.godomall;
 
 import com.example.demo.dto.OrderSearchRes;
+import com.example.demo.dto.base.BaseResponse;
 import com.example.demo.dto.godomall.OrderSearchDetail;
 import com.example.demo.util.GodomallUtils;
 import com.example.demo.webclient.godomall.GodomallAPI;
@@ -10,6 +11,7 @@ import com.example.demo.webclient.godomall.dto.OrderStatusDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +43,7 @@ public class GodomallService {
         //주문상태변경(결재완료->상품준비중) API Request 요청 (테스트필요. 테스트환경 없음)
 //        List<OrderStatusDto> orderSearchDtos = orderStatusUpdate(orderSearchDto);
 
-        return ResponseEntity.ok(orderSearchRes);
+        return ResponseEntity.ok(new BaseResponse<List<OrderSearchRes>>(HttpStatus.OK,"성공",orderSearchRes));
     }
 
     public ResponseEntity<?> deliveryStatus(@Valid DeliveryStatusDto param) {
