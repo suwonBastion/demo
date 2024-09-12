@@ -1,11 +1,11 @@
 package com.example.demo.service.godomall;
 
 import com.example.demo.dto.OrderSearchRes;
+import com.example.demo.dto.godomall.OrderSearchParam;
 import com.example.demo.util.GodomallUtils;
 import com.example.demo.webclient.godomall.GodomallAPI;
 import com.example.demo.webclient.godomall.dto.DeliveryStatusDto;
 import com.example.demo.webclient.godomall.dto.OrderSearchDto;
-import com.example.demo.dto.godomall.OrderSearchParam;
 import com.example.demo.webclient.godomall.dto.OrderStatusDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 import static com.example.demo.path.ApiPaths.*;
 
@@ -27,6 +26,8 @@ public class GodomallService {
     private final GodomallUtils godomallUtils;
 
     public ResponseEntity<?> orderSearch(OrderSearchParam param) {
+        if (param.getOrderStatus() == null) param.setOrderStatus("p1");
+
         OrderSearchDto orderSearchDto =
                 godomallAPI.post(
                         GODOMALL_ORDER_SEARCH,
@@ -55,8 +56,6 @@ public class GodomallService {
     }
 
 
-
-
     /////////////////////////////////////////////// private //////////////////////////////////////////////////
 
     private List<OrderStatusDto> orderStatusUpdate(OrderSearchDto orderSearchDto) {
@@ -75,7 +74,12 @@ public class GodomallService {
         return dtoList;
     }
 
-    private List<OrderSearchRes> convertToOrderSearchRes(OrderSearchDto orderSearchDto){
+    private List<OrderSearchRes> convertToOrderSearchRes(OrderSearchDto orderSearchDto) {
+        //NPE VALID
+        if (orderSearchDto.getOrderSearchReturn().getOrderData().isEmpty()) {
+            return null;
+        }
+
         List<OrderSearchRes> results = new ArrayList<>();
 
         orderSearchDto.getOrderSearchReturn().getOrderData().forEach(orderData -> {

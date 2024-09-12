@@ -1,7 +1,7 @@
 package com.example.demo.util;
 
-import com.example.demo.webclient.godomall.dto.OrderSearchDto;
 import com.example.demo.dto.godomall.OrderSearchParam;
+import com.example.demo.webclient.godomall.dto.OrderSearchDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,10 +23,10 @@ public class GodomallUtils {
         MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
         map.add("partner_key", tokenUtils.getGODOMALL_PARTNER());
         map.add("key", tokenUtils.getGODOMALL_USER());
-        map.add("startDate", param.startDate());
-        map.add("endDate", param.endDate());
-        map.add("orderStatus", param.orderStatus());
-        if (!param.orderNo().isEmpty()) map.add("orderNo", param.orderNo());
+        map.add("startDate", param.getStartDate());
+        map.add("endDate", param.getEndDate());
+        map.add("orderStatus", param.getOrderStatus());
+        if (!param.getOrderNo().isEmpty()) map.add("orderNo", param.getOrderNo());
 
         return map;
     }
