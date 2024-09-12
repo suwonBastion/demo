@@ -75,12 +75,11 @@ public class GodomallService {
     }
 
     private List<OrderSearchRes> convertToOrderSearchRes(OrderSearchDto orderSearchDto) {
-        //NPE VALID
-        if (orderSearchDto.getOrderSearchReturn().getOrderData().isEmpty()) {
-            return null;
-        }
-
         List<OrderSearchRes> results = new ArrayList<>();
+        //NPE VALID
+        if (orderSearchDto.getOrderSearchReturn().getOrderData() == null) {
+            return results;
+        }
 
         orderSearchDto.getOrderSearchReturn().getOrderData().forEach(orderData -> {
             orderData.getOrderGoodsData().forEach(orderGoodsData -> {
