@@ -1,7 +1,6 @@
 package com.example.demo.service.godomall;
 
 import com.example.demo.util.GodomallUtils;
-import com.example.demo.util.TokenUtils;
 import com.example.demo.webclient.godomall.GodomallAPI;
 import com.example.demo.webclient.godomall.dto.DeliveryStatusDto;
 import com.example.demo.webclient.godomall.dto.OrderSearchDto;
@@ -12,15 +11,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.demo.path.ApiPaths.*;
 import static com.example.demo.webclient.godomall.dto.OrderSearchDto.*;
-import static com.example.demo.webclient.godomall.dto.OrderSearchDto.OrderData.*;
 
 @Service
 @RequiredArgsConstructor
@@ -35,6 +31,13 @@ public class GodomallService {
 
         //주문상태변경(결재완료->상품준비중) API Request 요청 (테스트필요. 테스트환경 없음)
 //        OrderStatusDto orderSearchDtos = orderStatusUpdate(orderSearchDto);
+        List<OrderData> test = orderSearchDto.getOrderSearchReturn().getOrderData();
+        System.out.println("주문일자 : " + test.get(0).getOrderDate());
+        System.out.println("주문번호 : " + test.get(0).getOrderNo());
+        System.out.println("주문자 / 수령자 : " + test.get(0).getOrderInfoData().getOrderName() + " / " + test.get(0).getOrderInfoData().getReceiverName());
+        System.out.println("상품 : " + test.get(0).getOrderGoodsNm());
+        System.out.println("수량 : " + test.get(0).getOrderGoodsCnt());
+        System.out.println("상세요구사항 : " + test.get(0).getOrderInfoData().getOrderMemo());
 
         return ResponseEntity.ok(orderSearchDto);
     }
