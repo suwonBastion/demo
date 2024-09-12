@@ -1,6 +1,6 @@
 package com.example.demo.util;
 
-import com.example.demo.dto.godomall.OrderSearchParam;
+import com.example.demo.dto.godomall.OrderSearchDetail;
 import com.example.demo.webclient.godomall.dto.OrderSearchDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class GodomallUtils {
     private final TokenUtils tokenUtils;
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    public MultiValueMap<String, Object> createGodomallMap(OrderSearchParam param) {
+    public MultiValueMap<String, Object> createGodomallMap(OrderSearchDetail param) {
         MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
         map.add("partner_key", tokenUtils.getGODOMALL_PARTNER());
         map.add("key", tokenUtils.getGODOMALL_USER());

@@ -1,5 +1,6 @@
 package com.example.demo.controller.godomall;
 
+import com.example.demo.dto.godomall.OrderSearchDetail;
 import com.example.demo.dto.godomall.OrderSearchParam;
 import com.example.demo.service.godomall.GodomallService;
 import com.example.demo.webclient.godomall.dto.DeliveryStatusDto;
@@ -30,7 +31,7 @@ public class GodomallController {
     )})
     @PostMapping("/order-search")
     public ResponseEntity<?> orderSearch(@Valid @RequestBody OrderSearchParam param) {
-        return godomallService.orderSearch(param);
+        return godomallService.orderSearch(param.getOrderSearch().getFirst());
     }
 
     @Operation(summary = "주문상태변경", description = "상품준비중을 배송중으로 변경")

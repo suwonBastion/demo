@@ -1,7 +1,7 @@
 package com.example.demo.service.godomall;
 
 import com.example.demo.dto.OrderSearchRes;
-import com.example.demo.dto.godomall.OrderSearchParam;
+import com.example.demo.dto.godomall.OrderSearchDetail;
 import com.example.demo.util.GodomallUtils;
 import com.example.demo.webclient.godomall.GodomallAPI;
 import com.example.demo.webclient.godomall.dto.DeliveryStatusDto;
@@ -25,7 +25,7 @@ public class GodomallService {
     private final GodomallAPI godomallAPI;
     private final GodomallUtils godomallUtils;
 
-    public ResponseEntity<?> orderSearch(OrderSearchParam param) {
+    public ResponseEntity<?> orderSearch(OrderSearchDetail param) {
         if (param.getOrderStatus() == null) param.setOrderStatus("p1");
 
         OrderSearchDto orderSearchDto =
@@ -75,12 +75,11 @@ public class GodomallService {
     }
 
     private List<OrderSearchRes> convertToOrderSearchRes(OrderSearchDto orderSearchDto) {
-        //NPE VALID
-        if (orderSearchDto.getOrderSearchReturn().getOrderData().isEmpty()) {
-            return null;
-        }
-
         List<OrderSearchRes> results = new ArrayList<>();
+        //NPE VALID
+        if (orderSearchDto.getOrderSearchReturn().getOrderData() == null) {
+            return results;
+        }
 
         orderSearchDto.getOrderSearchReturn().getOrderData().forEach(orderData -> {
             orderData.getOrderGoodsData().forEach(orderGoodsData -> {
